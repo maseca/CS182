@@ -1,10 +1,20 @@
+//Maxwell Plotkin COMP182
 public class Fraction{
 
-    public int num, denom;
+    public int num, den;
 
-    Fraction(int n, int d){
+    public Fraction(int n, int d){
+        while (n != 1 && d % n == 0){
+            d /= n;
+            n /= n;
+        }//while
+
         this.num = n;
-        this.denom = d;
-    }
+        this.den = d;
+    }//constructor
+
+    public String display(){
+        return this.num + "/" + this.den;
+    }//display
 
 }//fraction

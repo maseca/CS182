@@ -1,3 +1,4 @@
+//Maxwell Plotkin COMP182
 public class PlotkinGCD{
 
     public static void main(String[] args) {
