@@ -7,7 +7,15 @@ public class SelectionSort {
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("Input integers separated by spaces:");
-		String in = sc.nextLine().trim();
+		String in;
+
+		try{
+			in = sc.nextLine().trim();
+		}catch(Exception e){
+			System.err.println("No input detected.");
+			in = "0";
+		}
+
 		int[] ary = aryFromStr(in);
 
 		System.out.println("Initial: " + Arrays.toString(ary));
