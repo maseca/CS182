@@ -19,7 +19,7 @@ public class SortTest{
 		int[] ary = aryFromStr(in);
 
 		System.out.println("Initial: " + Arrays.toString(ary));
-		Selection.sort(ary);
+		Insertion.sort(ary);
 		System.out.println("Final: " + Arrays.toString(ary));
 	}
 
