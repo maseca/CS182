@@ -4,22 +4,17 @@ import java.util.Arrays;
 public class Bubble {
 	public static void sort(int[] array) {
 		int len = array.length;
-		int iter = 0;
-		boolean unsorted = true;
 
-		while (unsorted) {
-			unsorted = false;
-			for (int i = 0; i < len - 1; ++i) {
-				if (array[i + 1] < array[i]) {
-					unsorted = true;
-
-					int temp = array[i];
-					array[i] = array[i+1];
-					array[i+1] = temp;
+		for (int i = 0; i < len - 1; ++i) {
+			for(int j = 1; j < len - i; ++j) {
+				if (array[j - 1] > array[j]) {
+					int temp = array[j];
+					array[j] = array[j - 1];
+					array[j - 1] = temp;
 				}
 			}
-			System.out.println(iter++ + ": " + Arrays.toString(array));
+			System.out.println(i + ": " + Arrays.toString(array));
 		}
-
 	}
+
 }
