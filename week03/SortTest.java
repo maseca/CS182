@@ -2,7 +2,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class SelectionSort {
+public class SortTest{
 	public static void main(String[] args){
 		Scanner sc = new Scanner(System.in);
 
@@ -19,26 +19,8 @@ public class SelectionSort {
 		int[] ary = aryFromStr(in);
 
 		System.out.println("Initial: " + Arrays.toString(ary));
-		selSort(ary);
+		Selection.sort(ary);
 		System.out.println("Final: " + Arrays.toString(ary));
-	}
-
-	public static void selSort(int[] array){
-		int len = array.length;
-
-		for(int i = 0; i < len-1; i++){
-			int index = i;
-
-			for(int j = i+1; j < len; j++){
-				if(array[j] < array[index])
-					index = j;
-			}
-
-			int num = array[index];
-			array[index] = array[i];
-			array[i] = num;
-			System.out.println(i + ": " + Arrays.toString(array));
-		}
 	}
 
 	public static int[] aryFromStr(String inStr){
