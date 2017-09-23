@@ -12,9 +12,9 @@ public class Bubble {
 					array[j] = array[j - 1];
 					array[j - 1] = temp;
 				}
+				System.out.println("inner" + j + ": " + Arrays.toString(array));
 			}
 			System.out.println(i + ": " + Arrays.toString(array));
 		}
 	}
-
 }

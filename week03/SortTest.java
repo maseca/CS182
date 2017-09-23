@@ -2,7 +2,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class SortTest{
+public class SortTest {
 	public static void main(String[] args){
 		Scanner sc = new Scanner(System.in);
 
@@ -19,7 +19,11 @@ public class SortTest{
 		int[] ary = aryFromStr(in);
 
 		System.out.println("Initial: " + Arrays.toString(ary));
-		Insertion.sort(ary);
+
+		Bubble.sort(ary);
+		//SortArray.heap(ary);
+		//SortArray.percDown(ary, 11, 2 - 1);
+
 		System.out.println("Final: " + Arrays.toString(ary));
 	}
 
