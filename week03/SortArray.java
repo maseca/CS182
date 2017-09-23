@@ -53,18 +53,23 @@ public class SortArray {
 
     public static void heap(int[] arr) {
         int len = arr.length;
+        int numPercs = 1;
 
-        //heapify
-        for(int i = len / 2 - 1; i >= 0; --i)
-			percDown(arr, len, i);
+	    System.out.println("Heapify:");
+        for(int i = len / 2 - 1; i >= 0; --i) {
+	        percDown(arr, len, i);
+	        System.out.println("Perc# " + numPercs++ + ": " + Arrays.toString(arr));
+        }
+        numPercs = 1;
 
-        //sort
+	    System.out.println("Sort:");
 	    for(int i = len - 1; i >= 0; --i){
 	    	int temp = arr[0];
 	    	arr[0] = arr[i];
 	    	arr[i] = temp;
 
 	    	percDown(arr, i, 0);
+		    System.out.println("Perc# " + numPercs++ + ": " + Arrays.toString(arr));
 	    }
     }
 

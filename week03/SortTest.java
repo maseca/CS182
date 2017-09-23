@@ -20,8 +20,7 @@ public class SortTest {
 
 		System.out.println("Initial: " + Arrays.toString(ary));
 
-		Bubble.sort(ary);
-		//SortArray.heap(ary);
+		SortArray.heap(ary);
 		//SortArray.percDown(ary, 11, 2 - 1);
 
 		System.out.println("Final: " + Arrays.toString(ary));
