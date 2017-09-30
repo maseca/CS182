@@ -21,7 +21,8 @@ public class SortTest {
 		System.out.println("Initial: " + Arrays.toString(ary));
 
 		SortArray.heap(ary);
-		//SortArray.percDown(ary, 11, 2 - 1);
+		//SortArray.percDown(ary, ary.length, 2 - 1);
+		//SortArray.percDown(ary, 12, 3 - 1);
 
 		System.out.println("Final: " + Arrays.toString(ary));
 	}
