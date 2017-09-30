@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class SortArray {
-	private String str;
+	String str;
 	private static int[] sA;
 
 	SortArray(){
@@ -84,7 +84,7 @@ public class SortArray {
 		}//for i
 	}//selection
 
-	private int[] _sToIA(String s){
+	static int[] _sToIA(String s){
 		String[] ints = s.split(" ");
 		int len = ints.length;
 
