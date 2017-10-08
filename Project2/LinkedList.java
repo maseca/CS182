@@ -11,7 +11,12 @@ public class LinkedList {
 	Node getHead() { return head; }
 	void setHead(Node h) { head = h; }
 
-	public String toString() { return this.toString(head); }
+	public String toString() {
+		if(head == null)
+			return "null";
+
+		return this.toString(head);
+	}
 	private String toString(Node itr) {
 		if (itr.getNext() == null)
 			return "" + itr;

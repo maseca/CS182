@@ -1,7 +1,7 @@
 //Maxwell Plotkin COMP182
 public class StackPlusGarbage extends Stack {
 	//attributes
-	private Stack garbage;
+	private Stack garbage = new Stack();
 
 	//methods
 	@Override
@@ -31,7 +31,5 @@ public class StackPlusGarbage extends Stack {
 	}
 
 	@Override
-	public String toString() {
-		return super.toString() + "\nGarbage: " + garbage;
-	}
+	public String toString() { return super.toString() + "\nGarbage: " + garbage; }
 }
