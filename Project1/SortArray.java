@@ -23,9 +23,7 @@ public class SortArray {
 		str = in;
 	}//constructor
 
-	SortArray(String s){
-		str = s.trim();
-	}//constructor
+	SortArray(String s){ str = s.trim(); }//constructor
 
 	SortArray(int[] array){
 		str = Arrays.toString(array)
