@@ -5,7 +5,7 @@ public class Test {
 	public static void main(String[] args) {
 		SortArray sa1, sa2, sa3;
 
-		sa1 = new SortArray();
+		sa1 = new SortArray()
 		System.out.println("sa1 before bubble sort: " + sa1.str);
 		sa1.bubble();
 		System.out.println("sa1 after sort: " + sa1);
