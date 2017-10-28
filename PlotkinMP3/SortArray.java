@@ -9,6 +9,7 @@ public class SortArray {
 	String str;
 	private static int[] sA;
 
+	//methods
 	SortArray(){
 		Scanner sc = new Scanner(System.in);
 

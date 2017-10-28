@@ -1,4 +1,4 @@
-//Maxwell Plotkin COMP182 10/7/2017
+//Maxwell Plotkin COMP182 10/28/2017
 //Tests SortArray
 
 public class Test {

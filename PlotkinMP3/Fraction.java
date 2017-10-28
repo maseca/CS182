@@ -1,9 +1,11 @@
-//Maxwell Plotkin COMP182
+//Maxwell Plotkin COMP182 10/28/2017
+//For use in rational arithmetic
 
 public class Fraction{
-	//properties
+	//attributes
     private int num, den;
 
+    //methods
     private Fraction(int n, int d){
 		if(d == 0){
 			System.out.println("Denominator can not be 0");
