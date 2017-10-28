@@ -108,6 +108,9 @@ public class SortArray {
 	void quickFraction() {
 		Fraction[] s = _sToFA(str);
 		quick(s, 0, s.length - 1);
+
+		System.out.println();
+		System.out.print("Final: ");
 		for(Fraction fraction : s){
 			System.out.print(fraction + " ");
 		}
@@ -115,6 +118,12 @@ public class SortArray {
 	}//quick fraction
 
 	private void quick(Fraction[] arr, int lowest, int highest){
+		System.out.print("Array: ");
+		for(Fraction fraction : arr){
+			System.out.print(fraction + " ");
+		}
+		System.out.println();
+
 		if(lowest < highest){
 			int part = partition(arr, lowest, highest);
 			quick(arr, lowest, part-1);
@@ -132,6 +141,7 @@ public class SortArray {
 			}//fi
 		}//end for
 		swap(arr, small+1, high);
+		System.out.println("Partition: " + arr[small+1]);
 		return small + 1;
 	}//partition
 
@@ -142,9 +152,16 @@ public class SortArray {
 	}
 
 	private void swap(Fraction[] arr, int pos1, int pos2){
-		Fraction temp = arr[pos1];
-		arr[pos1] = arr[pos2];
-		arr[pos2] = temp;
+		if(arr[pos1] != arr[pos2]) {
+			System.out.print("Swap " + arr[pos1] + " and " + arr[pos2] + ": ");
+
+			Fraction temp = arr[pos1];
+			arr[pos1] = arr[pos2];
+			arr[pos2] = temp;
+
+			for (Fraction fraction : arr) { System.out.print(fraction + " "); }
+			System.out.println();
+		}
 	}
 
 	private static int[] _sToIA(String s){

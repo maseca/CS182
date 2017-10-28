@@ -5,8 +5,7 @@ public class Test {
 	public static void main(String[] args) {
 		SortArray sa1 = new SortArray();
 
-		System.out.println("sa1 before quick sort: " + sa1.str);
-		System.out.print("sa1 after sort: ");
+		System.out.println("Given: " + sa1.str);
 		sa1.quickFraction();
 	}//main
 }//Test
