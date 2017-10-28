@@ -38,7 +38,12 @@ public class Fraction{
 		}//else
     }//constructor
 
-    public String toString(){ return this.num + "/" + this.den; }//toString
+    public String toString(){
+    	if(this.den == 1)
+    		return "" + this.num;
+
+    	return this.num + "/" + this.den;
+    }//toString
 
 	boolean isLessThan(Fraction comp) {
     	int num1 = this.num * comp.den;

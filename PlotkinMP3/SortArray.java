@@ -16,7 +16,7 @@ public class SortArray {
 		String in;
 
 		try{
-			in = sc.nextLine().trim();
+			in = sc.nextLine().replaceAll("\\s{2,}"," ").trim();
 		}catch(Exception e){
 			System.err.println("No input detected.");
 			in = "0";
@@ -25,7 +25,7 @@ public class SortArray {
 		str = in;
 	}//constructor
 
-	SortArray(String s){ str = s.trim(); }//constructor
+	SortArray(String s){ str = s.replaceAll("\\s{2,}"," ").trim(); }//constructor
 
 	SortArray(int[] array){
 		str = Arrays.toString(array)
@@ -147,7 +147,7 @@ public class SortArray {
 		arr[pos2] = temp;
 	}
 
-	static int[] _sToIA(String s){
+	private static int[] _sToIA(String s){
 		String[] ints = s.trim().split(" ");
 		int len = ints.length;
 
@@ -163,8 +163,8 @@ public class SortArray {
 		return arr;
 	}//s to ia
 
-	static Fraction[] _sToFA(String s) {
-		String[] fractions = s.trim().split(" ");
+	private static Fraction[] _sToFA(String s) {
+		String[] fractions = s.split(" ");
 		int len = fractions.length;
 
 		Fraction[] arr = new Fraction[len];
