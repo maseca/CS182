@@ -20,8 +20,9 @@ public class SortTest {
 
 		System.out.println("Initial: " + Arrays.toString(ary));
 
-		SortArray.quick(ary);
-
+		SortArray.insertion(ary);
+		//SortArray.percDown(ary, ary.length, 3 - 1);
+		//SortArray.percDown(ary, 12, 3 - 1);
 		System.out.println("Final: " + Arrays.toString(ary));
 	}
 

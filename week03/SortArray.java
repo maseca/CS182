@@ -13,8 +13,9 @@ public class SortArray {
 					array[j] = array[j - 1];
 					array[j - 1] = temp;
 				}
+				System.out.println("j " + j + ": " + Arrays.toString(array));
 			}
-			//System.out.println(i + ": " + Arrays.toString(array));
+			System.out.println(i + ": " + Arrays.toString(array));
 		}
 	}
 
@@ -22,15 +23,16 @@ public class SortArray {
 		int len = array.length;
 
 		for(int i = 1; i < len; ++i){
-			for(int j = 0; j < i; ++j){
-				if(array[i] < array[j]){
-					int temp = array[i];
-					array[i] = array[j];
+			for(int j = i; j > 0; --j){
+				if(array[j] < array[j-1]){
+					int temp = array[j-1];
+					array[j-1] = array[j];
 					array[j] = temp;
 				}
+				System.out.println("j: " + j + ": " + Arrays.toString(array));
 			}
 
-			//System.out.println(i-1 + ": " + Arrays.toString(array));
+			System.out.println(i + ": " + Arrays.toString(array));
 		}
 	}
 
@@ -48,7 +50,8 @@ public class SortArray {
 			int num = array[index];
 			array[index] = array[i];
 			array[i] = num;
-			//System.out.println(i + ": " + Arrays.toString(array));
+			System.out.println(i + ": " + Arrays.toString(array));
+			System.out.println("index: " + index);
 		}
 	}
 
@@ -74,7 +77,7 @@ public class SortArray {
 	    }
     }
 
-    private static void percDown(int[] arr, int size, int root){
+    public static void percDown(int[] arr, int size, int root){
 	    int largest = root;
         int l = 2*root + 1;
         int r = 2*root + 2;
@@ -115,28 +118,32 @@ public class SortArray {
 		iA = iL = iR = 0;
 
 		while (iA < total){
-			if(iL < lenL && iR < lenR)
+			if(iL < lenL && iR < lenR) {
 				if (l[iL] < r[iR])
 					a[iA++] = l[iL++];
 				else
 					a[iA++] = r[iR++];
-			else
-			if(iL >= lenL)
-				while(iR < lenR)
-					a[iA++] = r[iR++];
-			if(iR >= lenR)
-				while(iL < lenL)
-					a[iA++] = l[iL++];
+			}else {
+				if (iL >= lenL)
+					while (iR < lenR)
+						a[iA++] = r[iR++];
+				if (iR >= lenR)
+					while (iL < lenL)
+						a[iA++] = l[iL++];
+			}
 		}
 	}
 
-    /* This function takes last element as pivot,
-       places the pivot element at its correct
-       position in sorted array, and places all
-       smaller (smaller than pivot) to left of
-       pivot and all greater elements to right
-       of pivot */
-    static int partition(int arr[], int low, int high)
+	static void myQuick(int arr[]){
+		int pivot = (arr[0] + arr[arr.length-1]) / 2;
+		boolean swapped = true;
+
+		while(swapped){
+
+		}
+	}
+
+    static int myPartition(int arr[], int low, int high)
     {
         int pivot = arr[high];
         int i = (low-1); // index of smaller element
@@ -163,22 +170,70 @@ public class SortArray {
         return i+1;
     }
 
+	private static void swap(int[] arr, int pos1, int pos2){
+		int temp = arr[pos1];
+		arr[pos1] = arr[pos2];
+		arr[pos2] = temp;
+	}
 
-    static void quick(int arr[]){
-    	quick(arr, 0, arr.length-1);
-    }
-    static void quick(int arr[], int low, int high)
+	public static void quick(int[] arr){ quick(arr, 0, arr.length-1);}
+
+	public static void quick(int[] arr, int lowest, int highest){
+		if(lowest < highest){
+			int part = partition(arr, lowest, highest);
+			System.out.println("Partition: " + part);
+			System.out.println("QS: "+ Arrays.toString(arr));
+			quick(arr, lowest, part-1);
+			quick(arr, part+1, highest);
+		}
+	}
+
+	private static int partition(int[] arr, int low, int high){
+		int pivot = arr[high], small = low-1;
+		for(int x = low; x < high; x++) {
+			if (arr[x] <= pivot) {
+				small++;
+				System.out.println("PART BEFORE 1ST SWAP: " + Arrays.toString(arr));
+				swap(arr, x, small);
+				System.out.println("PART AFTER 1ST SWAP: " + Arrays.toString(arr));
+			}
+		}
+		System.out.println("PART BEFORE 2ND SWAP: "+ Arrays.toString(arr));
+		swap(arr, small+1, high);
+		System.out.println("PART AFTER 2ND SWAP: "+ Arrays.toString(arr));
+		return small+1;
+	}
+
+	public static void indexPartition(int[] arr, int low, int high){
+		int pivot = (low+high)/2;
+		do{
+			if(arr[low] < arr[pivot]) low++;
+			if(arr[pivot] < arr[high]) high--;
+			if(arr[low] >= arr[pivot] && arr[high] <= arr[pivot]) {
+				swap(arr, low, high);
+				low++;
+				high--;
+			}
+			System.out.println("PIVOT: " + pivot + " || LOWEST: " + low + " || HIGHEST: " + high);
+			System.out.println(Arrays.toString(arr));
+			System.out.println();
+		}while(low < high);
+	}
+
+    static void quickRec(int arr[]){ quickRec(arr, 0, arr.length-1); }
+    static void quickRec(int arr[], int low, int high)
     {
         if (low < high)
         {
             /* pi is partitioning index, arr[pi] is
               now at right place */
-            int pi = partition(arr, low, high);
+            int pi = myPartition(arr, low, high);
+            //System.out.println(pi);
 
             // Recursively sort elements before
             // partition and after partition
-            quick(arr, low, pi-1);
-            quick(arr, pi+1, high);
+            quickRec(arr, low, pi-1);
+            quickRec(arr, pi+1, high);
         }
     }
 }
