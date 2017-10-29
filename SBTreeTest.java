@@ -14,7 +14,30 @@ public class SBTreeTest {
 			in = "0";
 		}
 
+		System.out.print("Pre-Sorted: ");
 		System.out.println(treeFromStr(in));
+
+		/*
+		int[] ary = aryFromStr(in);
+		SortArray.insertion(ary);
+		System.out.println("Sorted: " + Arrays.toString(ary));
+		*/
+}
+
+	private static int[] aryFromStr(String inStr){
+		String[] strAry = inStr.split(" ");
+		int sLen = strAry.length;
+		int[] intAry = new int[sLen];
+
+		for(int i=0; i < sLen; ++i){
+			try {
+				intAry[i] = Integer.parseInt(strAry[i]);
+			}catch(Exception e){
+				System.err.println("Failed to parse: " + strAry[i]);
+			}
+		}
+
+		return intAry;
 	}
 
 	private static SBTree treeFromStr(String inStr){
@@ -31,7 +54,7 @@ public class SBTreeTest {
 
 			tree.add(i);
 			//System.out.println(num);
-			System.out.println(tree.toString());
+			//System.out.println(tree.toString());
 		}
 
 		return tree;

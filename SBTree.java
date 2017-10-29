@@ -1,5 +1,7 @@
+import java.util.ArrayList;
+
 class SBTree {
-	TNode root = null;
+	private TNode root;
 
 	//methods
 	private int heightOf(TNode n){
@@ -77,7 +79,6 @@ class SBTree {
 		return n;
 	}
 
-
 	public String toString() { return this.toString(root); }
 	private String toString(TNode node){
 		String parent, left, right;
@@ -91,6 +92,6 @@ class SBTree {
 			if (node.right != null)
 				right = toString(node.right);
 		}
-		return left + parent + right;
+		return parent + left + right;
 	}
 }
