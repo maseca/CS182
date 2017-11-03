@@ -1,86 +1,89 @@
-import java.util.ArrayList;
-
 class SBTree {
-	private TNode root;
+    TNode root;
 
-	//methods
-	private int heightOf(TNode n){
-		if(n == null)
-			return 0;
-		return n.height;
-	}
+    private int getHeight(TNode N) {
+        if (N == null)
+            return 0;
 
-	private int maxOf(int a, int b){ return (a > b) ? a : b; }
+        return N.height;
+    }
 
-	private int getBalance(TNode n){
-		if(n == null)
-			return 0;
-		return heightOf(n.left) - heightOf(n.right);
-	}
+    private int max(int a, int b) { return (a > b) ? a : b; }
 
-	private TNode rotateRight(TNode n){
-		TNode left = n.left;
-		TNode leftRight = left.right;
+    private TNode rightRotate(TNode y) {
+        TNode x = y.left;
+        TNode T2 = x.right;
 
-		left.right = n;
-		n.left = leftRight;
+        x.right = y;
+        y.left = T2;
 
-		n.height = maxOf(heightOf(n.left), heightOf(n.right)) + 1;
-		left.height = maxOf(heightOf(left.left), heightOf(left.right)) + 1;
+        y.height = max(getHeight(y.left), getHeight(y.right)) + 1;
+        x.height = max(getHeight(x.left), getHeight(x.right)) + 1;
 
-		return left;
-	}
+        return x;
+    }
 
-	private TNode rotateLeft(TNode n){
-		TNode right = n.right;
-		TNode rightLeft = right.left;
+    private TNode leftRotate(TNode x) {
+        TNode y = x.right;
+        TNode T2 = y.left;
 
-		right.left = n;
-		n.right = rightLeft;
+        y.left = x;
+        x.right = T2;
 
-		n.height = maxOf(heightOf(n.left), heightOf(n.right)) + 1;
-		right.height = maxOf(heightOf(right.left), heightOf(right.right)) + 1;
+        x.height = max(getHeight(x.left), getHeight(x.right)) + 1;
+        y.height = max(getHeight(y.left), getHeight(y.right)) + 1;
 
-		return right;
-	}
+        return y;
+    }
 
-	void add(int x){ root = add(root, x); }
-	private TNode add(TNode n, int value) { //no duplicates
-		if (n == null)
-			return (new TNode(value));
+    private int getBalance(TNode N) {
+        if (N == null)
+            return 0;
+        return getHeight(N.left) - getHeight(N.right);
+    }
 
-		if (value < n.value)
-			n.left = add(n.left, value);
-		else if (value > n.value)
-			n.right = add(n.right, value);
-		else
-			return n;
+    void insert(int value){ this.root = this.insert(this.root, value); }
+    private TNode insert(TNode node, int value) {
+        if (node == null)
+            return (new TNode(value));
 
-		n.height = 1 + maxOf(heightOf(n.left), heightOf(n.right));
+        if (value < node.value)
+            node.left = insert(node.left, value);
+        else if (value > node.value)
+            node.right = insert(node.right, value);
+        else //no duplicates
+            return node;
 
-		int balance = getBalance(n);
+        node.height = 1 + max(getHeight(node.left),
+                              getHeight(node.right));
 
-		if (balance > 1 && value < n.left.value)
-			return rotateRight(n);
+        int balance = getBalance(node);
 
-		if (balance < -1 && value > n.right.value)
-			return rotateLeft(n);
+        //left left
+        if (balance > 1 && value < node.left.value)
+            return rightRotate(node);
 
-		if (balance > 1 && value > n.left.value) {
-			n.left = rotateLeft(n.left);
-			return rotateRight(n);
-		}
+        //right right
+        if (balance < -1 && value > node.right.value)
+            return leftRotate(node);
 
-		if (balance < -1 && value < n.right.value) {
-			n.right = rotateRight(n.right);
-			return rotateLeft(n);
-		}
+        //left right
+        if (balance > 1 && value > node.left.value) {
+            node.left = leftRotate(node.left);
+            return rightRotate(node);
+        }
 
-		return n;
-	}
+        //right left
+        if (balance < -1 && value < node.right.value) {
+            node.right = rightRotate(node.right);
+            return leftRotate(node);
+        }
 
-	public String toString() { return this.toString(root); }
-	private String toString(TNode node){
+        return node;
+    }
+
+	public String toPreOrder() { return this.toPreOrder(root); }
+	private String toPreOrder(TNode node){
 		String parent, left, right;
 		parent = left = right = "";
 
@@ -88,10 +91,43 @@ class SBTree {
 			parent = node.toString();
 
 			if (node.left != null)
-				left = toString(node.left);
+				left = toPreOrder(node.left);
 			if (node.right != null)
-				right = toString(node.right);
+				right = toPreOrder(node.right);
 		}
 		return parent + left + right;
 	}
+
+    public String toInOrder() { return this.toInOrder(root); }
+    private String toInOrder(TNode node){
+        String parent, left, right;
+        parent = left = right = "";
+
+        if(node != null) {
+            parent = node.toString();
+
+            if (node.left != null)
+                left = toInOrder(node.left);
+            if (node.right != null)
+                right = toInOrder(node.right);
+        }
+        return left + parent + right;
+    }
+
+    public String toPostOrder() { return this.toPostOrder(root); }
+    private String toPostOrder(TNode node){
+        String parent, left, right;
+        parent = left = right = "";
+
+        if(node != null) {
+            parent = node.toString();
+
+            if (node.left != null)
+                left = toPostOrder(node.left);
+            if (node.right != null)
+                right = toPostOrder(node.right);
+        }
+        return left + right + parent;
+    }
+
 }

@@ -14,14 +14,15 @@ public class SBTreeTest {
 			in = "0";
 		}
 
-		System.out.print("Pre-Sorted: ");
-		System.out.println(treeFromStr(in));
+		System.out.print("Pre-Ordered: ");
+		System.out.println(treePre(in));
+		System.out.print("In-Ordered: ");
+		System.out.println(treeIn(in));
+		System.out.print("Post-Ordered: ");
+		System.out.println(treePost(in));
 
-		/*
-		int[] ary = aryFromStr(in);
-		SortArray.insertion(ary);
-		System.out.println("Sorted: " + Arrays.toString(ary));
-		*/
+		//SortArray.insertion(ary);
+		//System.out.println("Sorted: " + Arrays.toPreOrder(ary));
 }
 
 	private static int[] aryFromStr(String inStr){
@@ -40,7 +41,7 @@ public class SBTreeTest {
 		return intAry;
 	}
 
-	private static SBTree treeFromStr(String inStr){
+	private static String treePre(String inStr){
 		String[] strAry = inStr.split(" ");
 		SBTree tree = new SBTree();
 		int i = 0;
@@ -52,11 +53,40 @@ public class SBTreeTest {
 				System.err.println("Failed to parse: " + num);
 			}
 
-			tree.add(i);
-			//System.out.println(num);
-			//System.out.println(tree.toString());
+			tree.insert(i);
 		}
+		return tree.toPreOrder();
+	}
+	private static String treePost(String inStr){
+		String[] strAry = inStr.split(" ");
+		SBTree tree = new SBTree();
+		int i = 0;
 
-		return tree;
+		for (String num : strAry) {
+			try {
+				i = Integer.parseInt(num);
+			} catch (Exception e) {
+				System.err.println("Failed to parse: " + num);
+			}
+
+			tree.insert(i);
+		}
+		return tree.toPostOrder();
+	}
+	private static String treeIn(String inStr){
+		String[] strAry = inStr.split(" ");
+		SBTree tree = new SBTree();
+		int i = 0;
+
+		for (String num : strAry) {
+			try {
+				i = Integer.parseInt(num);
+			} catch (Exception e) {
+				System.err.println("Failed to parse: " + num);
+			}
+
+			tree.insert(i);
+		}
+		return tree.toInOrder();
 	}
 }
