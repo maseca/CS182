@@ -102,7 +102,7 @@ class SBTree {
             root.right = delete(root.right, root.value);
         }
 
-        return root;
+        return this.insert(root, root.value);
     }
 
     private int minValue(TNode root)
