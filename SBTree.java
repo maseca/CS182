@@ -82,7 +82,43 @@ class SBTree {
         return node;
     }
 
-	public String toPreOrder() { return this.toPreOrder(root); }
+    void delete(int value) { this.root = delete(root, value); }
+    private TNode delete(TNode root, int value)
+    {
+        if (root == null)
+            return null;
+
+        if (value < root.value)
+            root.left = delete(root.left, value);
+        else if (value > root.value)
+            root.right = delete(root.right, value);
+        else {
+            if (root.left == null)
+                return root.right;
+            else if (root.right == null)
+                return root.left;
+
+            root.value = minValue(root.right);
+            root.right = delete(root.right, root.value);
+        }
+
+        return root;
+    }
+
+    private int minValue(TNode root)
+    {
+        int minv = root.value;
+
+        while (root.left != null)
+        {
+            minv = root.left.value;
+            root = root.left;
+        }
+
+        return minv;
+    }
+
+	String toPreOrder() { return this.toPreOrder(root); }
 	private String toPreOrder(TNode node){
 		String parent, left, right;
 		parent = left = right = "";
@@ -98,7 +134,7 @@ class SBTree {
 		return parent + left + right;
 	}
 
-    public String toInOrder() { return this.toInOrder(root); }
+    String toInOrder() { return this.toInOrder(root); }
     private String toInOrder(TNode node){
         String parent, left, right;
         parent = left = right = "";
@@ -114,7 +150,7 @@ class SBTree {
         return left + parent + right;
     }
 
-    public String toPostOrder() { return this.toPostOrder(root); }
+    String toPostOrder() { return this.toPostOrder(root); }
     private String toPostOrder(TNode node){
         String parent, left, right;
         parent = left = right = "";
