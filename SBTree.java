@@ -8,6 +8,20 @@ class SBTree {
         return N.height;
     }
 
+    private int getLevelHeight(TNode node){
+        if (node == null)
+            return 0;
+        else{
+            int leftHeight = getLevelHeight(node.left);
+            int rightHeight = getLevelHeight(node.right);
+
+            if (leftHeight > rightHeight)
+                return leftHeight + 1;
+            else
+                return rightHeight + 1;
+        }
+    }
+
     private int max(int a, int b) {
         return (a > b) ? a : b;
     }
@@ -223,4 +237,25 @@ class SBTree {
         return left + right + parent;
     }
 
+    String toLevelOrder() {return this.toLevelOrder(root);}
+    private String toLevelOrder(TNode node){
+        String out = "";
+        int height = getLevelHeight(node);
+        for(int i = 1; i <= height; ++i)
+            out += levelToString(node, i);
+
+        return out;
+    }
+
+    String levelToString(TNode node, int level){
+        if (node == null)
+            return ",";
+        if(level == 1)
+            return node.value + ",";
+        else if(level > 1){
+            return levelToString(node.left, level-1)
+                + levelToString(node.right, level-1);
+        }
+        return "";
+    }
 }

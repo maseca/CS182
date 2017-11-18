@@ -16,10 +16,10 @@ public class SBTreeTest {
 
 		sbTree = treeFromStr(in);
 
-		sbTree.insert(15);
-		sbTree.delete(85);
-		sbTree.insert(95);
-		sbTree.delete(39);
+		sbTree.delete(20);
+		sbTree.insert(5);
+		sbTree.delete(61);
+		sbTree.insert(79);
 
 		System.out.print("Pre-Ordered: ");
 		System.out.println(sbTree.toPreOrder());
@@ -27,6 +27,9 @@ public class SBTreeTest {
 		System.out.println(sbTree.toInOrder());
 		System.out.print("Post-Ordered: ");
 		System.out.println(sbTree.toPostOrder());
+		System.out.print("Level-Ordered: ");
+		System.out.println(sbTree.toLevelOrder());
+
 	}
 
 	private static SBTree treeFromStr(String inStr){
