@@ -8,7 +8,9 @@ class SBTree {
         return N.height;
     }
 
-    private int max(int a, int b) { return (a > b) ? a : b; }
+    private int max(int a, int b) {
+        return (a > b) ? a : b;
+    }
 
     private TNode rightRotate(TNode y) {
         TNode x = y.left;
@@ -42,7 +44,10 @@ class SBTree {
         return getHeight(N.left) - getHeight(N.right);
     }
 
-    void insert(int value){ this.root = this.insert(this.root, value); }
+    void insert(int value) {
+        this.root = this.insert(this.root, value);
+    }
+
     private TNode insert(TNode node, int value) {
         if (node == null)
             return (new TNode(value));
@@ -55,7 +60,7 @@ class SBTree {
             return node;
 
         node.height = 1 + max(getHeight(node.left),
-                              getHeight(node.right));
+                getHeight(node.right));
 
         int balance = getBalance(node);
 
@@ -82,9 +87,11 @@ class SBTree {
         return node;
     }
 
-    void delete(int value) { this.root = delete(root, value); }
-    private TNode delete(TNode root, int value)
-    {
+    void delete(int value) {
+        this.root = delete(root, value);
+    }
+
+    private TNode delete(TNode root, int value) {
         if (root == null)
             return null;
 
@@ -93,17 +100,57 @@ class SBTree {
         else if (value > root.value)
             root.right = delete(root.right, value);
         else {
-            if (root.left == null)
-                return root.right;
-            else if (root.right == null)
-                return root.left;
+            if ((root.left == null) || (root.right == null)) {
+                TNode temp = null;
+                if (null == root.left)
+                    temp = root.right;
+                else
+                    temp = root.left;
 
-            root.value = minValue(root.right);
-            root.right = delete(root.right, root.value);
+                // No child case
+                if (temp == null) {
+                    temp = root;
+                    root = null;
+                } else   // One child case
+                    root = temp;
+            } else {
+                TNode temp = minValueNode(root.right);
+                root.value = temp.value;
+                root.right = delete(root.right, temp.value);
+            }
         }
 
-        return this.insert(root, root.value);
+        if (root == null)
+            return root;
+
+        root.height = max(getHeight(root.left), getHeight(root.right)) + 1;
+
+        int balance = getBalance(root);
+
+        // Left Left Case
+        if (balance > 1 && getBalance(root.left) >= 0)
+            return rightRotate(root);
+
+        // Left Right Case
+        if (balance > 1 && getBalance(root.left) < 0) {
+            root.left = leftRotate(root.left);
+            return rightRotate(root);
+        }
+
+        // Right Right Case
+        if (balance < -1 && getBalance(root.right) <= 0)
+            return leftRotate(root);
+
+        // Right Left Case
+        if (balance < -1 && getBalance(root.right) > 0) {
+            root.right = rightRotate(root.right);
+            return leftRotate(root);
+        }
+
+        return root;
     }
+
+
 
     private int minValue(TNode root)
     {
@@ -116,6 +163,16 @@ class SBTree {
         }
 
         return minv;
+    }
+
+    TNode minValueNode(TNode node) {
+        TNode current = node;
+
+        /* loop down to find the leftmost leaf */
+        while (current.left != null)
+           current = current.left;
+
+        return current;
     }
 
 	String toPreOrder() { return this.toPreOrder(root); }
