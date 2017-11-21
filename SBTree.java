@@ -1,5 +1,5 @@
 class SBTree {
-    TNode root;
+    private TNode root;
 
     private int getHeight(TNode N) {
         if (N == null)
@@ -135,7 +135,7 @@ class SBTree {
         }
 
         if (root == null)
-            return root;
+            return null;
 
         root.height = max(getHeight(root.left), getHeight(root.right)) + 1;
 
@@ -168,21 +168,20 @@ class SBTree {
 
     private int minValue(TNode root)
     {
-        int minv = root.value;
+        int min = root.value;
 
         while (root.left != null)
         {
-            minv = root.left.value;
+            min = root.left.value;
             root = root.left;
         }
 
-        return minv;
+        return min;
     }
 
-    TNode minValueNode(TNode node) {
+    private TNode minValueNode(TNode node) {
         TNode current = node;
 
-        /* loop down to find the leftmost leaf */
         while (current.left != null)
            current = current.left;
 
@@ -247,7 +246,7 @@ class SBTree {
         return out;
     }
 
-    String levelToString(TNode node, int level){
+    private String levelToString(TNode node, int level){
         if (node == null)
             return ",";
         if(level == 1)

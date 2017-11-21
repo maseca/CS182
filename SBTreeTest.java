@@ -16,10 +16,10 @@ public class SBTreeTest {
 
 		sbTree = treeFromStr(in);
 
-		sbTree.delete(20);
+		sbTree.insert(13);
+		sbTree.delete(10);
 		sbTree.insert(5);
-		sbTree.delete(61);
-		sbTree.insert(79);
+		//sbTree.delete(94);
 
 		System.out.print("Pre-Ordered: ");
 		System.out.println(sbTree.toPreOrder());
