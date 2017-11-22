@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Lumber {
     private int dimX, dimY;
     private FeetInches length;
@@ -15,7 +17,7 @@ public class Lumber {
 
     public static void lumberFactory(String str){
         int[] dims;
-        LengthQuantity[] lQs;
+        ArrayList<LengthQuantity> lQs;
 
         String out = "";
         String in = str.replaceAll("\\s{2,}", " ").trim();
@@ -23,6 +25,7 @@ public class Lumber {
 
         dims = parseDims(inAry[0]);
         if (dims[0] < 2 || dims[0] > 6 || dims[1] < 3 || dims[1] > 12) return;
+
 
 
 

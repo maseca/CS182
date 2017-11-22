@@ -20,7 +20,7 @@ public class FeetInches {
                 String[] parts = inAry[0].substring(0,inAry[0].length() - 1).split("'");
                 ft = Integer.parseInt(parts[0]);
                 ft += Integer.parseInt(parts[1]) / 12;
-                in = new Fraction(Integer.parseInt(parts[1]) % 12, 1);
+                in = new Fraction(Integer.parseInt(parts[1]) % 12, 12);
             }else{
                 ft = Integer.parseInt(inAry[0].substring(0,inAry[0].length() - 1));
             }
