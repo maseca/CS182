@@ -2,15 +2,16 @@ public class FeetInches {
     private int feet;
     private Fraction inches;
 
-    private FeetInches(int ft, Fraction in){
+    FeetInches(int ft, Fraction in){
         feet = ft;
         inches = in;
     }
 
-    static FeetInches ftInFactory(String str){
+    static FeetInches parseFtIn(String str){
         int ft = 0;
         Fraction in = new Fraction(0,1);
-        String[] inAry = str.split(" ");
+        String[] inAry = str.replaceAll("ft", "\'")
+                .replaceAll("in","\"").split(" ");
 
         if(inAry.length == 2){
             ft = Integer.parseInt(inAry[0]);
@@ -27,6 +28,20 @@ public class FeetInches {
         }
 
         return new FeetInches(ft, in);
+    }
+
+    public boolean greaterThan(FeetInches fI){
+        double a = this.feet * 12 + this.inches.num / this.inches.den;
+        double b = fI.feet * 12 + fI.inches.num / fI.inches.den;
+
+        return a > b;
+    }
+
+    public boolean lessThan(FeetInches fI){
+        double a = this.feet * 12 + this.inches.num / this.inches.den;
+        double b = fI.feet * 12 + fI.inches.num / fI.inches.den;
+
+        return a < b;
     }
 
     public String toString(){

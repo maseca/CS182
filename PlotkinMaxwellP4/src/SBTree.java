@@ -22,9 +22,7 @@ class SBTree {
         }
     }
 
-    private int max(int a, int b) {
-        return (a > b) ? a : b;
-    }
+    private int max(int a, int b) { return (a > b) ? a : b; }
 
     private TNode rightRotate(TNode y) {
         TNode x = y.left;
@@ -58,20 +56,20 @@ class SBTree {
         return getHeight(N.left) - getHeight(N.right);
     }
 
-    void insert(int value) {
-        this.root = this.insert(this.root, value);
-    }
+    void insert(FeetInches value, int quantity) { this.root = this.insert(this.root, value, quantity); }
 
-    private TNode insert(TNode node, int value) {
+    private TNode insert(TNode node, FeetInches value, int quantity) {
         if (node == null)
-            return (new TNode(value));
+            return (new TNode(value, quantity));
 
-        if (value < node.value)
-            node.left = insert(node.left, value);
-        else if (value > node.value)
-            node.right = insert(node.right, value);
-        else //no duplicates
+        if (value.lessThan(node.value))
+            node.left = insert(node.left, value, quantity);
+        else if (value.greaterThan(node.value))
+            node.right = insert(node.right, value, quantity);
+        else {
+            node.quantity += quantity;
             return node;
+        }
 
         node.height = 1 + max(getHeight(node.left),
                 getHeight(node.right));
@@ -79,21 +77,21 @@ class SBTree {
         int balance = getBalance(node);
 
         //left left
-        if (balance > 1 && value < node.left.value)
+        if (balance > 1 && value.lessThan(node.left.value))
             return rightRotate(node);
 
         //right right
-        if (balance < -1 && value > node.right.value)
+        if (balance < -1 && value.greaterThan(node.right.value))
             return leftRotate(node);
 
         //left right
-        if (balance > 1 && value > node.left.value) {
+        if (balance > 1 && value.greaterThan(node.left.value)) {
             node.left = leftRotate(node.left);
             return rightRotate(node);
         }
 
         //right left
-        if (balance < -1 && value < node.right.value) {
+        if (balance < -1 && value.lessThan(node.right.value)) {
             node.right = rightRotate(node.right);
             return leftRotate(node);
         }
@@ -101,17 +99,15 @@ class SBTree {
         return node;
     }
 
-    void delete(int value) {
-        this.root = delete(root, value);
-    }
+    void delete(FeetInches value) { this.root = delete(root, value); }
 
-    private TNode delete(TNode root, int value) {
+    private TNode delete(TNode root, FeetInches value) {
         if (root == null)
             return null;
 
-        if (value < root.value)
+        if (value.lessThan(root.value))
             root.left = delete(root.left, value);
-        else if (value > root.value)
+        else if (value.greaterThan(root.value))
             root.right = delete(root.right, value);
         else {
             if ((root.left == null) || (root.right == null)) {
@@ -166,9 +162,9 @@ class SBTree {
 
 
 
-    private int minValue(TNode root)
+    private FeetInches minValue(TNode root)
     {
-        int min = root.value;
+        FeetInches min = root.value;
 
         while (root.left != null)
         {
