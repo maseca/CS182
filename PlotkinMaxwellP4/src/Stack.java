@@ -1,10 +1,10 @@
 //Maxwell Plotkin COMP182
 public class Stack extends LinkedList {
 	//methods
-	void push(TNode i) { setHead(new Node(i, head)); }
+	void push(TNode i) { setHead(new Node(i)); }
 	void pushNode(Node n) { setHead(n); }
 
-	public TNode pop() {
+	TNode pop() {
 		TNode i = head.getInfo();
 		setHead(head.getNext());
 		return i;
@@ -15,5 +15,5 @@ public class Stack extends LinkedList {
 		return n;
 	}
 
-	public TNode peek() { return head.getInfo(); }
+	TNode peek() { return head.getInfo(); }
 }

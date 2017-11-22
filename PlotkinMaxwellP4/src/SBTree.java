@@ -253,4 +253,17 @@ class SBTree {
         }
         return "";
     }
+
+    TNode find(FeetInches value){return find(root, value);}
+    private TNode find(TNode root, FeetInches value) {
+        if (root == null)
+            return null;
+
+        if (value.lessThan(root.value))
+            return find(root.left, value);
+        else if (value.greaterThan(root.value))
+            return find(root.right, value);
+        else
+            return root;
+    }
 }

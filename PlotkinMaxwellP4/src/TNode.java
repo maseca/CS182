@@ -10,5 +10,5 @@ public class TNode {
 	TNode(FeetInches i, int q) { value = i; height = 1; quantity = q;}
 
 	//method
-	public String toString() { return value + "<" + quantity + ">(" + (height-1) + ") ";}
+	public String toString() { return value + "(" + quantity + ")<" + (height-1) + "> ";}
 }

@@ -2,7 +2,7 @@ public class FeetInches {
     private int feet;
     private Fraction inches;
 
-    FeetInches(int ft, Fraction in){
+    private FeetInches(int ft, Fraction in){
         feet = ft;
         inches = in;
     }
