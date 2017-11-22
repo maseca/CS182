@@ -1,32 +1,27 @@
 import java.util.ArrayList;
 
 public class Lumber {
-    private int dimX, dimY;
-    private FeetInches length;
-
-    private Lumber(int x, int y, FeetInches len, int q){
-        dimX = x;
-        dimY = y;
-        length = len;
-    }
+    SBTree[][] matrix = new SBTree[5][10]; //2..6 X 3..12
 
     private class LengthQuantity{
         FeetInches length;
         int quantity;
     }
 
-    public static Lumber lumberFactory(String str){
+    void lumberFactory(String str){
         int[] dims;
         ArrayList<LengthQuantity> lQs;
 
         String out = "";
         String in = str.replaceAll("\\s{2,}", " ").trim();
-        String dimStr = in.substring(0, in.indexOf(" ") + 1);
+        String dimStr = in.substring(0, in.indexOf(" "));
+        String lQStr = in.substring(in.indexOf(" ")+1, in.length());
 
         dims = parseDims(dimStr);
+        if(dims == null) return;
 
-
-        return new Lumber(dims[0], dims[1], new FeetInches(1,new Fraction(0,1)), 1);
+        dims[0] -= 2;
+        dims[1] -= 3;
     }
 
     private static int[] parseDims(String str){

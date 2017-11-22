@@ -30,14 +30,14 @@ public class FeetInches {
         return new FeetInches(ft, in);
     }
 
-    public boolean greaterThan(FeetInches fI){
+    boolean greaterThan(FeetInches fI){
         double a = this.feet * 12 + this.inches.num / this.inches.den;
         double b = fI.feet * 12 + fI.inches.num / fI.inches.den;
 
         return a > b;
     }
 
-    public boolean lessThan(FeetInches fI){
+    boolean lessThan(FeetInches fI){
         double a = this.feet * 12 + this.inches.num / this.inches.den;
         double b = fI.feet * 12 + fI.inches.num / fI.inches.den;
 

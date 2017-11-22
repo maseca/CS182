@@ -1,13 +1,15 @@
 public class Test {
     public static void main(String[] args){
-        FeetInches x, y, z;
+        SBTree sbTree = new SBTree();
 
-        x = FeetInches.parseFtIn("10ft");
-        y = FeetInches.parseFtIn("12ft18in");
-        z = FeetInches.parseFtIn("10 7/8'");
+        sbTree.insert(FeetInches.parseFtIn("12'"), 20);
+        sbTree.insert(FeetInches.parseFtIn("12'0\""), 20);
+        sbTree.insert(FeetInches.parseFtIn("15ft"), 20);
 
-        System.out.println(x);
-        System.out.println(y);
-        System.out.println(z);
+        System.out.println(sbTree.toPostOrder());
+
+        Lumber lumber = new Lumber();
+
+        lumber.lumberFactory("2x4 12'(180)");
     }
 }
