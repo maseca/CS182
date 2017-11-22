@@ -11,7 +11,7 @@ public class FeetInches {
         int ft = 0;
         Fraction in = new Fraction(0,1);
         String[] inAry = str.replaceAll("ft", "\'")
-                .replaceAll("in","\"").split(" ");
+                .replaceAll("in","\"").trim().split(" ");
 
         if(inAry.length == 2){
             ft = Integer.parseInt(inAry[0]);
