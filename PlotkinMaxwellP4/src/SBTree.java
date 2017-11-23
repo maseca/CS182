@@ -100,7 +100,6 @@ class SBTree {
     }
 
     void delete(FeetInches value) { this.root = delete(root, value); }
-
     private TNode delete(TNode root, FeetInches value) {
         if (root == null)
             return null;
@@ -126,6 +125,7 @@ class SBTree {
             } else {
                 TNode temp = minValueNode(root.right);
                 root.value = temp.value;
+                root.quantity = temp.quantity;
                 root.right = delete(root.right, temp.value);
             }
         }
@@ -184,6 +184,7 @@ class SBTree {
         return current;
     }
 
+    public String toString() { return this.toPreOrder(root); }
 	String toPreOrder() { return this.toPreOrder(root); }
 	private String toPreOrder(TNode node){
 		String parent, left, right;

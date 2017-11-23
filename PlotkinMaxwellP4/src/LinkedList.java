@@ -21,7 +21,7 @@ public class LinkedList {
 		if (itr.getNext() == null)
 			return "" + itr;
 
-		return itr + ", " + toString(itr.getNext());
+		return itr + toString(itr.getNext());
 	}
 
 	void inAfterHead(TNode i) { head.setNext(new Node(i)); }

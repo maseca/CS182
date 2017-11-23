@@ -4,8 +4,15 @@ public class Test {
 
         lumber.lumberFactory("2x4 12'(180) 15ft3in(200) 3 3/4'(10)");
 
-        System.out.println(lumber.matrix[0][1].find(FeetInches.parseFtIn("12'")));
-        lumber.sellLumber(0,1,FeetInches.parseFtIn("12'"),80);
-        System.out.println(lumber.matrix[0][1].find(FeetInches.parseFtIn("12'")));
+        System.out.println(lumber.matrix[0][1]);
+        lumber.sellLumber(0,1,FeetInches.parseFtIn("12'"),180);
+        lumber.sellLumber(0,1,FeetInches.parseFtIn("15'3\""),200);
+        //lumber.sellLumber(0,1,FeetInches.parseFtIn("15'3\""),200);
+        System.out.println(lumber.matrix[0][1]);
+        System.out.println(lumber.stack[0][1]);
+
+        lumber.lumberFactory("2x4 15'3\"(20)");
+        System.out.println(lumber.matrix[0][1]);
+        System.out.println(lumber.stack[0][1]);
     }
 }

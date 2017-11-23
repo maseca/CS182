@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 class Lumber {
     SBTree[][] matrix = new SBTree[5][10]; //2..6 X 3..12
-    private Stack[][] stack = new Stack[5][10];
+    Stack[][] stack = new Stack[5][10];
 
     private class LengthQuantity{
         FeetInches length;
@@ -41,7 +41,8 @@ class Lumber {
 
         for(LengthQuantity lq : lQs) {
             matrix[dims[0]][dims[1]].insert(lq.length, lq.quantity);
-            if(stack[dims[0]][dims[1]] != null && stack[dims[0]][dims[1]].peek().value == lq.length)
+
+            if(stack[dims[0]][dims[1]] != null && stack[dims[0]][dims[1]].peek().value.equals(lq.length))
                 stack[dims[0]][dims[1]].pop();
         }
     }
@@ -82,7 +83,7 @@ class Lumber {
         if(stack[dimX][dimY] == null)
             stack[dimX][dimY] = new Stack();
 
-        stack[dimX][dimY].push(tN);
+        stack[dimX][dimY].push(new TNode(tN.value));
         matrix[dimX][dimY].delete(tN.value);
     }
 

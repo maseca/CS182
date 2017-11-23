@@ -44,6 +44,13 @@ public class FeetInches {
         return a < b;
     }
 
+    boolean equals(FeetInches fI){
+        double a = this.feet * 12 + this.inches.num / this.inches.den;
+        double b = fI.feet * 12 + fI.inches.num / fI.inches.den;
+
+        return a == b;
+    }
+
     public String toString(){
         String out = "" + feet;
 
