@@ -62,7 +62,33 @@ class Lumber {
         return out;
     }
 
-    void sellLumber(int dimX, int dimY, FeetInches len, int q){
+    void sellLumber(String str){
+        String in = str.replaceAll("\\s{2,}", " ").trim();
+        int[] dims = parseDims(in.substring(0, in.indexOf(" ")));
+        String lqStr = in.substring(in.indexOf(" ")+1, in.length());
+
+        if(dims == null) return;
+
+        dims[0] -= 2;
+        dims[1] -= 3;
+
+        ArrayList<LengthQuantity> lQs = new ArrayList<>();
+        String[] lqAry = lqStr.split("\\)");
+        for(String lq : lqAry){
+            String[] parts = lq.split("\\(");
+
+            lQs.add(new LengthQuantity(
+                    FeetInches.parseFtIn(parts[0]),
+                    Integer.parseInt(parts[1])
+            ));
+        }
+        if(lQs.isEmpty()) return;
+
+        for(LengthQuantity lq : lQs)
+            sellLumber(dims[0],dims[1], lq.length, lq.quantity);
+    }
+
+    private void sellLumber(int dimX, int dimY, FeetInches len, int q){
         if(matrix[dimX][dimY] == null)
             return;
 
@@ -85,6 +111,21 @@ class Lumber {
 
         stack[dimX][dimY].push(new TNode(tN.value));
         matrix[dimX][dimY].delete(tN.value);
+
+        if (matrix[dimX][dimY].isEmpty())
+            matrix[dimX][dimY] = null;
     }
 
+    public String toString(){
+        String out = "";
+
+        for(int i = 0; i < 5; ++i){
+            for(int j = 0; j < 10; ++j){
+                if(matrix[i][j] != null)
+                    out += (i+2) + "x" + (j+3) + "  " + matrix[i][j] + "\n";
+            }
+        }
+
+        return out;
+    }
 }

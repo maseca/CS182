@@ -267,4 +267,8 @@ class SBTree {
         else
             return root;
     }
+
+    boolean isEmpty(){
+        return root == null;
+    }
 }
