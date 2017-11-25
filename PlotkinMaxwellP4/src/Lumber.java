@@ -5,10 +5,10 @@ class Lumber {
     Stack[][] stack = new Stack[5][10];
 
     private class LengthQuantity{
-        FeetInches length;
+        Feet length;
         int quantity;
 
-        LengthQuantity(FeetInches fI, int q){
+        LengthQuantity(Feet fI, int q){
             length = fI;
             quantity = q;
         }
@@ -16,6 +16,8 @@ class Lumber {
 
     void lumberFactory(String str){
         String in = str.replaceAll("\\s{2,}", " ").trim();
+        if(!in.contains(" ")) return;
+
         int[] dims = parseDims(in.substring(0, in.indexOf(" ")));
         String lqStr = in.substring(in.indexOf(" ")+1, in.length());
 
@@ -30,7 +32,7 @@ class Lumber {
             String[] parts = lq.split("\\(");
 
             lQs.add(new LengthQuantity(
-                    FeetInches.parseFtIn(parts[0]),
+                    Feet.fromString(parts[0]),
                     Integer.parseInt(parts[1])
             ));
         }
@@ -64,6 +66,8 @@ class Lumber {
 
     void sellLumber(String str){
         String in = str.replaceAll("\\s{2,}", " ").trim();
+        if(!in.contains(" ")) return;
+
         int[] dims = parseDims(in.substring(0, in.indexOf(" ")));
         String lqStr = in.substring(in.indexOf(" ")+1, in.length());
 
@@ -78,7 +82,7 @@ class Lumber {
             String[] parts = lq.split("\\(");
 
             lQs.add(new LengthQuantity(
-                    FeetInches.parseFtIn(parts[0]),
+                    Feet.fromString(parts[0]),
                     Integer.parseInt(parts[1])
             ));
         }
@@ -88,7 +92,7 @@ class Lumber {
             sellLumber(dims[0],dims[1], lq.length, lq.quantity);
     }
 
-    private void sellLumber(int dimX, int dimY, FeetInches len, int q){
+    private void sellLumber(int dimX, int dimY, Feet len, int q){
         if(matrix[dimX][dimY] == null)
             return;
 

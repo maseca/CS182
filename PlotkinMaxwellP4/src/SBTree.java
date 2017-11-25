@@ -56,9 +56,9 @@ class SBTree {
         return getHeight(N.left) - getHeight(N.right);
     }
 
-    void insert(FeetInches value, int quantity) { this.root = this.insert(this.root, value, quantity); }
+    void insert(Feet value, int quantity) { this.root = this.insert(this.root, value, quantity); }
 
-    private TNode insert(TNode node, FeetInches value, int quantity) {
+    private TNode insert(TNode node, Feet value, int quantity) {
         if (node == null)
             return (new TNode(value, quantity));
 
@@ -99,8 +99,8 @@ class SBTree {
         return node;
     }
 
-    void delete(FeetInches value) { this.root = delete(root, value); }
-    private TNode delete(TNode root, FeetInches value) {
+    void delete(Feet value) { this.root = delete(root, value); }
+    private TNode delete(TNode root, Feet value) {
         if (root == null)
             return null;
 
@@ -162,9 +162,9 @@ class SBTree {
 
 
 
-    private FeetInches minValue(TNode root)
+    private Feet minValue(TNode root)
     {
-        FeetInches min = root.value;
+        Feet min = root.value;
 
         while (root.left != null)
         {
@@ -255,8 +255,8 @@ class SBTree {
         return "";
     }
 
-    TNode find(FeetInches value){return find(root, value);}
-    private TNode find(TNode root, FeetInches value) {
+    TNode find(Feet value){return find(root, value);}
+    private TNode find(TNode root, Feet value) {
         if (root == null)
             return null;
 
