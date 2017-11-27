@@ -1,4 +1,5 @@
-//Maxwell Plotkin COMP182
+//Maxwell Plotkin COMP182 12/9/2017
+//Stack for garbage collection
 class Stack extends LinkedList {
 	//methods
 	void push(TNode i) { setHead(new Node(i, head)); }
@@ -9,4 +10,4 @@ class Stack extends LinkedList {
 	}
 
 	TNode peek() { return head.getInfo(); }
-}
+}//stack

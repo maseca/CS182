@@ -1,12 +1,10 @@
-//Maxwell Plotkin COMP182 10/28/2017
+//Maxwell Plotkin COMP182 12/9/2017
 //Finds Greatest Common Denominator of 2 integers
-public class PlotkinGCD{
+class PlotkinGCD{
     //methods
-    public static void main(String[] args) { System.out.println(findGCD(20,15)); }//main
-
     static int findGCD(int x, int y){
         if(x == 0 || y == 0){
-            System.out.println("0 has no common denominator");
+            System.err.println("0 has no common denominator");
             System.exit(1);
         }//fi
 
@@ -24,5 +22,4 @@ public class PlotkinGCD{
         }//while
         return x;
     }//findgcd
-
 }//plotkingcd

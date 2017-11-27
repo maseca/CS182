@@ -1,13 +1,14 @@
-//Maxwell Plotkin COMP182 10/28/2017
+//Maxwell Plotkin COMP182 12/9/2017
 //For use in rational arithmetic
 
 public class Fraction{
 	//attributes
     int num, den;
 
-    //methods
-    Fraction(int n, int d){ this.simplify(n,d); }
+    //constructor
+	Fraction(int n, int d){ this.simplify(n,d); }//Fraction
 
+    //methods
     public String toString(){
     	if(this.den == 1)
     		return "" + this.num;
@@ -41,7 +42,8 @@ public class Fraction{
 		if(d == 0){
 			System.err.println("Denominator can not be 0");
 			System.exit(1);
-		}
+		}//end
+
 		if(n == 0){
 		    this.num = 0;
 		    this.den = 1;
@@ -58,7 +60,7 @@ public class Fraction{
 			} else if (d < 0) {
 				d *= -1;
 				sign = -1;
-			}
+			}//end
 
 			do {
 				gcd = PlotkinGCD.findGCD(n, d);
@@ -68,8 +70,8 @@ public class Fraction{
 
 			this.num = sign * n;
 			this.den = d;
-		}
-	}
+		}//end
+	}//simplify
 
-	Fraction multiply(int x, int y) { return new Fraction(this.num * x, this.den * y); }
+	Fraction multiply(int x, int y) { return new Fraction(this.num * x, this.den * y); }//multiply
 }//fraction

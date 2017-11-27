@@ -1,12 +1,16 @@
+//Maxwell Plotkin COMP182 12/9/2017
+//Self balancing tree to manage lumber
 class SBTree {
+    //attributes
     private TNode root;
 
+    //methods
     private int getHeight(TNode N) {
         if (N == null)
             return 0;
 
         return N.height;
-    }
+    }//getHeight
 
     private int getLevelHeight(TNode node){
         if (node == null)
@@ -19,8 +23,8 @@ class SBTree {
                 return leftHeight + 1;
             else
                 return rightHeight + 1;
-        }
-    }
+        }//end
+    }//getLevelHeight
 
     private int max(int a, int b) { return (a > b) ? a : b; }
 
@@ -35,7 +39,7 @@ class SBTree {
         x.height = max(getHeight(x.left), getHeight(x.right)) + 1;
 
         return x;
-    }
+    }//rightRotate
 
     private TNode leftRotate(TNode x) {
         TNode y = x.right;
@@ -48,13 +52,13 @@ class SBTree {
         y.height = max(getHeight(y.left), getHeight(y.right)) + 1;
 
         return y;
-    }
+    }//leftRotate
 
     private int getBalance(TNode N) {
         if (N == null)
             return 0;
         return getHeight(N.left) - getHeight(N.right);
-    }
+    }//getBalance
 
     void insert(Feet value, int quantity) { this.root = this.insert(this.root, value, quantity); }
 
@@ -69,7 +73,7 @@ class SBTree {
         else {
             node.quantity += quantity;
             return node;
-        }
+        }//end
 
         node.height = 1 + max(getHeight(node.left),
                 getHeight(node.right));
@@ -88,16 +92,16 @@ class SBTree {
         if (balance > 1 && value.greaterThan(node.left.value)) {
             node.left = leftRotate(node.left);
             return rightRotate(node);
-        }
+        }//end
 
         //right left
         if (balance < -1 && value.lessThan(node.right.value)) {
             node.right = rightRotate(node.right);
             return leftRotate(node);
-        }
+        }//end
 
         return node;
-    }
+    }//insert
 
     void delete(Feet value) { this.root = delete(root, value); }
     private TNode delete(TNode root, Feet value) {
@@ -127,8 +131,8 @@ class SBTree {
                 root.value = temp.value;
                 root.quantity = temp.quantity;
                 root.right = delete(root.right, temp.value);
-            }
-        }
+            }//end
+        }//end
 
         if (root == null)
             return null;
@@ -145,7 +149,7 @@ class SBTree {
         if (balance > 1 && getBalance(root.left) < 0) {
             root.left = leftRotate(root.left);
             return rightRotate(root);
-        }
+        }//end
 
         // Right Right Case
         if (balance < -1 && getBalance(root.right) <= 0)
@@ -155,25 +159,23 @@ class SBTree {
         if (balance < -1 && getBalance(root.right) > 0) {
             root.right = rightRotate(root.right);
             return leftRotate(root);
-        }
+        }//end
 
         return root;
-    }
+    }//delete
 
 
 
-    private Feet minValue(TNode root)
-    {
+    private Feet minValue(TNode root) {
         Feet min = root.value;
 
-        while (root.left != null)
-        {
+        while (root.left != null) {
             min = root.left.value;
             root = root.left;
-        }
+        }//while
 
         return min;
-    }
+    }//minValue
 
     private TNode minValueNode(TNode node) {
         TNode current = node;
@@ -182,7 +184,7 @@ class SBTree {
            current = current.left;
 
         return current;
-    }
+    }//minValueNode
 
     public String toString() { return this.toPreOrder(root); }
 	String toPreOrder() { return this.toPreOrder(root); }
@@ -197,9 +199,9 @@ class SBTree {
 				left = toPreOrder(node.left);
 			if (node.right != null)
 				right = toPreOrder(node.right);
-		}
+		}//end
 		return parent + left + right;
-	}
+	}//toPreOrder
 
     String toInOrder() { return this.toInOrder(root); }
     private String toInOrder(TNode node){
@@ -213,9 +215,9 @@ class SBTree {
                 left = toInOrder(node.left);
             if (node.right != null)
                 right = toInOrder(node.right);
-        }
+        }//end
         return left + parent + right;
-    }
+    }//toInOrder
 
     String toPostOrder() { return this.toPostOrder(root); }
     private String toPostOrder(TNode node){
@@ -229,9 +231,9 @@ class SBTree {
                 left = toPostOrder(node.left);
             if (node.right != null)
                 right = toPostOrder(node.right);
-        }
+        }//end
         return left + right + parent;
-    }
+    }//toPostOrder
 
     String toLevelOrder() {return this.toLevelOrder(root);}
     private String toLevelOrder(TNode node){
@@ -241,7 +243,7 @@ class SBTree {
             out += levelToString(node, i);
 
         return out;
-    }
+    }//toLevelOrder
 
     private String levelToString(TNode node, int level){
         if (node == null)
@@ -251,9 +253,9 @@ class SBTree {
         else if(level > 1){
             return levelToString(node.left, level-1)
                 + levelToString(node.right, level-1);
-        }
+        }//end
         return "";
-    }
+    }//levelToString
 
     TNode find(Feet value){return find(root, value);}
     private TNode find(TNode root, Feet value) {
@@ -266,9 +268,7 @@ class SBTree {
             return find(root.right, value);
         else
             return root;
-    }
+    }//find
 
-    boolean isEmpty(){
-        return root == null;
-    }
+    boolean isEmpty(){ return root == null; }
 }
