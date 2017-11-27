@@ -15,13 +15,14 @@ public class LinkedList {
 		if(head == null)
 			return "null";
 
-		return this.toString(head);
+		return this._toString(head);
 	}
-	private String toString(Node itr) {
+
+	private String _toString(Node itr) {
 		if (itr.getNext() == null)
 			return "" + itr;
 
-		return itr + toString(itr.getNext());
+		return itr + _toString(itr.getNext());
 	}
 
 	void inAfterHead(TNode i) { head.setNext(new Node(i)); }

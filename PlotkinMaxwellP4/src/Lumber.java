@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 class Lumber {
-    SBTree[][] matrix = new SBTree[5][10]; //2..6 X 3..12
-    Stack[][] stack = new Stack[5][10];
+    private SBTree[][] matrix = new SBTree[5][10]; //2..6 X 3..12
+    Stack stack = new Stack();
 
     private class LengthQuantity{
         Feet length;
@@ -31,10 +31,11 @@ class Lumber {
         for(String lq : lqAry){
             String[] parts = lq.split("\\(");
 
-            lQs.add(new LengthQuantity(
-                    Feet.fromString(parts[0]),
-                    Integer.parseInt(parts[1])
-            ));
+            if(Integer.parseInt(parts[1]) > 0)
+                lQs.add(new LengthQuantity(
+                        Feet.fromString(parts[0]),
+                        Integer.parseInt(parts[1])
+                ));
         }
         if(lQs.isEmpty()) return;
 
@@ -44,8 +45,8 @@ class Lumber {
         for(LengthQuantity lq : lQs) {
             matrix[dims[0]][dims[1]].insert(lq.length, lq.quantity);
 
-            if(stack[dims[0]][dims[1]] != null && stack[dims[0]][dims[1]].peek().value.equals(lq.length))
-                stack[dims[0]][dims[1]].pop();
+            if(stack.head != null && stack.peek().value.equals(lq.length))
+                stack.pop();
         }
     }
 
@@ -89,10 +90,10 @@ class Lumber {
         if(lQs.isEmpty()) return;
 
         for(LengthQuantity lq : lQs)
-            sellLumber(dims[0],dims[1], lq.length, lq.quantity);
+            _sellLumber(dims[0],dims[1], lq.length, lq.quantity);
     }
 
-    private void sellLumber(int dimX, int dimY, Feet len, int q){
+    private void _sellLumber(int dimX, int dimY, Feet len, int q){
         if(matrix[dimX][dimY] == null)
             return;
 
@@ -110,10 +111,10 @@ class Lumber {
     }
 
     private void remove(int dimX, int dimY, TNode tN) {
-        if(stack[dimX][dimY] == null)
-            stack[dimX][dimY] = new Stack();
+        if(stack == null)
+            stack = new Stack();
 
-        stack[dimX][dimY].push(new TNode(tN.value));
+        stack.push(new TNode(tN.value));
         matrix[dimX][dimY].delete(tN.value);
 
         if (matrix[dimX][dimY].isEmpty())

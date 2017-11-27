@@ -44,9 +44,7 @@ public class Feet {
         return a < b;
     }
 
-    boolean equals(Feet fI){
-        return (this.feet == fI.feet && this.partial == fI.partial);
-    }
+    boolean equals(Feet fI){ return (this.toString().equals(fI.toString())); }
 
     public String toString(){
         String out = "" + feet;

@@ -5,12 +5,16 @@ import java.util.Scanner;
 
 public class LumberMenu {
     public static void main(String[] args){
+        menu();
+    }
+
+    static void menu(){
         Scanner kb = new Scanner(System.in);
         Lumber lumber = new Lumber();
         char selection;
 
         do {
-            System.out.println("Lumber Tracking System:\n" +
+            System.out.println("\nLumber Tracking System:\n" +
                     "(P)rint total stock\n" +
                     "(L)oad from file\n" +
                     "(S)ave to file\n" +
@@ -55,6 +59,7 @@ public class LumberMenu {
 
     private static void printStock(Lumber lumber) {
         System.out.println(lumber);
+        System.out.println("Stack contents: " + lumber.stack);
     }
 
     private static void loadFile(Lumber lumber) {
